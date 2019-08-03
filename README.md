@@ -410,7 +410,7 @@ A workflow *can* be used to determine a precise flow of conversation.
 
 It *must* start with a `~` line, that defines the list name.
 
-Only one workflow *can* start with a `<` dialogue. Such a workflow will be
+Only one workflow *can* start with a `~` dialogue. Such a workflow will be
 activated and used by default when the user connects to the bot.
 
 ```
@@ -537,7 +537,7 @@ It is also possible to use the "not equal" sign `!` in *conditional branching*:
 < Hmm... bye then...
 ```
 
-*Conditional branching* also work well with scripts as long as a value is returned. If a script returns the value `true`, the corresponding branch will be activated. If alls test are `false` *conditional branching* will skip all branches and continue with the current workflow: 
+*Conditional branching* also work well with scripts as long as a value is returned. If a script returns the value `true`, the corresponding branch will be activated. If alls test are `false` *conditional branching* will skip all branches and continue with the current workflow:
 
 ```
 ~ ask_for_email

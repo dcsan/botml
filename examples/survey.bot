@@ -1,0 +1,81 @@
+~ start
+> lets go
+~ [survey]
+
+# < say 'survey'
+
+> ok
+~ [survey]
+
+> no
+< really no?
+
+# ~ [survey]
+
+~ survey
+< starting the survey.
+~ [age]
+# ~ [name]
+# ~ [birthplace]
+< OK ${name}. So you are age ${age}, born in ${birthplace}. [ending]
+~ status
+
+~ name
+< What should I call you?
+< What's your name?
+> *{name}
+< Great, I'll call you $name
+< ok
+
+~ age
+< How old are you?
+~ ask_age
+> *{age}
+---
+  ` !/[0-9].*/.test($age)
+  < Please give me a number
+  ~ [ask_age]
+---
+< OK got it, you're ${age}.
+
+
+~ birthplace
+< And where were you born?
+> * in *{birthplace}
+> * near *{birthplace}
+> *{birthplace}
+< [ok]
+
+> status
+< age: ${age}
+  name: ${name}
+  born: ${birthplace}
+@ trigger('status', $age, $name, $birthplace)
+
+> dbg
+@ trigger('dbg')
+
+# @ trigger('status', [ $age, $name, $birthplace ] )
+
+# @ trigger('status', [ {age: $age, name: $name, birthplace: $birthplace} ] )
+
+# lists
+
+= ending
+- Have a nice day
+- That's all for now.
+
+= hello
+- hello
+- hi
+- hey
+- good day
+
+= ok
+- ok
+- k
+- alright
+- perfect
+- sure
+- yes
+- yeah

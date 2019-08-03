@@ -1,0 +1,154 @@
+! BOTML 2
+
+# lists
+
+= hi
+- hello!
+- how are you?
+- having a great day?
+- whats up?
+
+= botname
+- tixy
+- the ticket bot
+
+= try_again
+- Try again
+- Have another guess
+- Guess again!
+- Another idea?
+
+= menu_options
+- quiz
+- colors
+
+~ start
+> start
+< [hi] What shall we do?
+~ [main_menu]
+
+~ main_menu
+< Main menu!
+~ [prompt]
+
+~ prompt
+< Please choose one:
+? [menu_options]
+
+# ~ quiz
+> quiz
+< Lets play a game!
+~ [q2]
+
+
+> hi
+< [hi] This is [botname]
+
+> time
+< It's daytime.
+
+> 你好
+< 你好吗。
+
+> 我叫*{name}
+< hello $
+
+> choose *{name}
+< you chose $name
+< do you like ${name}
+< why did you choose $name
+
+> ok
+< ok! ya
+
+> colors
+< whats your favorite color?
+---
+  > red
+  < a bright color!
+---
+  > black
+  < how dark
+---
+  > white
+  < don't get dirty!
+---
+> *{color}
+< you like $color. OK!
+~ [main_menu]
+
+~ cities
+< what's your favorite city
+< which cities do you like?
+< what city would you like to live in?
+---
+  > paris
+  < how romantic
+  < ooh lala!
+  ~ [main]
+---
+  > /london|ldn/
+  < so expensive
+  < Fish & Chips!
+  < Red buses!
+  ~ [main]
+---
+> *{city}
+< I've never been to $city
+~ [main]
+
+
+#### Q1 france capital
+
+~ q1
+< Whats the capital of France?
+---
+  > Paris
+  < Right!
+  ~ [q2]
+---
+> *{q1answer}
+< No $q1answer is NOT the capital of France!
+@ trigger('wrong', 'q1', $q1answer)
+~ [q1]
+
+### Q2 USA capital
+
+~ q2
+< What's the capital of the USA?
+---
+  > /New York|NY|NYC/
+  < It's a big city, but not the capital
+  ~ [q2wrong]
+---
+  > /washington|ws|wash|DC/
+  < yes!
+  ~ [q2right]
+---
+  > /.* DC/
+  < Which DC?
+  ~ [q2wrong]
+---
+  > SF
+  < Just the tech capital.
+  ~ [q2wrong]
+---
+  > skip
+  < OK, let's skip it then
+  ~ [main_menu]
+---
+> *{q2answer}
+< Hmm, $q2answer?
+~ [q2wrong]
+
+~ q2wrong
+< [try_again]
+~ [q2]
+
+~ q2right
+< Right!
+@ trigger('right', 'q2', $q2answer)
+~ [main_menu]
+
+# < $city isn't the answer. [try_again]
+# < Nope, $city is wrong. [try_again]

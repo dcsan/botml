@@ -28,6 +28,13 @@
     "examples",
     "lib"
   ],
+
+  "nodemonConfig": {
+    "watch": ["examples", "lib" ],
+    "ignore": ["test/*", "docs/*"],
+    "delay": "500"
+  },
+
   "directories": {
     "lib": "lib",
     "example": "examples"
@@ -41,7 +48,8 @@
     "autotest": "supervisor -q -t -n exit -x mocha -- -b",
     "precommit": "npm run lint && npm test",
     "prepush": "npm run lint && npm test",
-    "build": "parcel build lib/botml.js --public-url ./ --target browser --global Botml -o botml"
+    "build": "parcel build lib/botml.js --public-url ./ --target browser --global Botml -o botml",
+    "cli": "nodemon -e js,bot lib/cli.js examples/chinese.bot"
   },
   "preferGlobal": true,
   "bin": {
@@ -62,7 +70,7 @@
     "babel-eslint": "^8.2.2",
     "chai": "^3.5.0",
     "decache": "^4.4.0",
-    "eslint": "^5.9.0",
+    "eslint": "^5.16.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
