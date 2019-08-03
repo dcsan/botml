@@ -1,6 +1,10 @@
+# ~ start
+# > start
+# < ready?
+# ~ [survey]
+
 > start
-~ start
-< ready?
+< starting!
 ~ [survey]
 
 > ok
@@ -10,6 +14,7 @@
 < really no?
 
 ~ survey
+> survey
 < OK lets go
 ~ [color]
 ~ [age]
@@ -31,7 +36,6 @@
 
 ~ color
 < What's your favorite color?
-> *{color}
 ---
   > purple
   < Do you like Prince?
