@@ -1,8 +1,7 @@
+> start
 ~ start
-> lets go
+< ready?
 ~ [survey]
-
-# < say 'survey'
 
 > ok
 ~ [survey]
@@ -10,15 +9,17 @@
 > no
 < really no?
 
-# ~ [survey]
-
 ~ survey
-< starting the survey.
+< OK lets go
+~ [color]
 ~ [age]
 # ~ [name]
 # ~ [birthplace]
-< OK ${name}. So you are age ${age}, born in ${birthplace}. [ending]
-~ status
+< OK thanks!
+~ [status]
+
+> me
+< So you are age ${age}, OK your name is ${name}. Born in ${birthplace}. [ending]
 
 ~ name
 < What should I call you?
@@ -26,6 +27,21 @@
 > *{name}
 < Great, I'll call you $name
 < ok
+
+
+~ color
+< What's your favorite color?
+> *{color}
+---
+  > purple
+  < Do you like Prince?
+---
+  > blue
+  < Don't be sad!
+---
+< OK you like ${color}
+
+
 
 ~ age
 < How old are you?
@@ -46,7 +62,11 @@
 > *{birthplace}
 < [ok]
 
+
 > status
+~ [status]
+
+~ status
 < age: ${age}
   name: ${name}
   born: ${birthplace}
