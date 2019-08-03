@@ -1,9 +1,6 @@
-# ~ start
-# > start
-# < ready?
-# ~ [survey]
+! BOTML 3
 
-> start
+~ start
 < starting!
 ~ [survey]
 
@@ -14,9 +11,7 @@
 < really no?
 
 ~ survey
-< ready for the survey?
-> [ok]
-< OK lets go
+< survey time!
 ~ [color]
 ~ [age]
 < OK thanks!
@@ -42,16 +37,17 @@
 ~ color
 < whats your fave color?
 ---
-  > purple
-  < Do you like Prince?
----
   > blue
   < Don't be sad!
 ---
   > red
   < Roses are red!
 ---
-< OK you like ${color}
+> *{color}
+< you like ${color}
+
+# ---
+# < OK you like ${color}
 
 
 
