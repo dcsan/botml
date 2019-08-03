@@ -7,24 +7,29 @@
 < starting!
 ~ [survey]
 
-> ok
+> [ok]
 ~ [survey]
 
 > no
 < really no?
 
 ~ survey
-> survey
+< ready for the survey?
+> [ok]
 < OK lets go
 ~ [color]
 ~ [age]
+< OK thanks!
+~ [show]
+
 # ~ [name]
 # ~ [birthplace]
-< OK thanks!
-~ [status]
 
-> me
-< So you are age ${age}, OK your name is ${name}. Born in ${birthplace}. [ending]
+~ show
+< So you are age ${age},
+  Favorite color is ${color}
+  Your name is ${name}
+  Born in ${birthplace}. [ending]
 
 ~ name
 < What should I call you?
@@ -35,7 +40,7 @@
 
 
 ~ color
-< What's your favorite color?
+< whats your fave color?
 ---
   > purple
   < Do you like Prince?
@@ -43,20 +48,27 @@
   > blue
   < Don't be sad!
 ---
+  > red
+  < Roses are red!
+---
 < OK you like ${color}
 
 
 
 ~ age
 < How old are you?
-~ ask_age
-> *{age}
----
-  ` !/[0-9].*/.test($age)
-  < Please give me a number
-  ~ [ask_age]
----
+> #{age}
 < OK got it, you're ${age}.
+
+# ~ ask_age
+# > *{age}
+# ---
+# ---
+#   ```!/[0-9].*/.test($age)```
+#   < Please give me a number
+#   ~ [ask_age]
+# ---
+
 
 
 ~ birthplace
@@ -79,6 +91,10 @@
 > dbg
 @ trigger('dbg')
 
+> reset
+< resetting
+@ trigger('reset')
+
 # @ trigger('status', [ $age, $name, $birthplace ] )
 
 # @ trigger('status', [ {age: $age, name: $name, birthplace: $birthplace} ] )
@@ -99,7 +115,6 @@
 - ok
 - k
 - alright
-- perfect
 - sure
 - yes
 - yeah
